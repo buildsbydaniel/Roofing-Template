@@ -1,95 +1,145 @@
-"use client";
-
-import { motion } from "framer-motion";
+'use client'
+import { useEffect, useRef } from 'react'
 
 const testimonials = [
-  {
-    quote:
-      "Peak Roofing replaced our entire roof in under 3 days. The crew was professional, the job site was spotless, and the quality is outstanding. Highly recommend.",
-    name: "Sarah M.",
-    location: "Hillcrest, San Diego",
-  },
-  {
-    quote:
-      "After getting 4 quotes, Peak Roofing was the most transparent and fair. They found a structural issue no one else caught — and fixed it for free. That's integrity.",
-    name: "James T.",
-    location: "Mission Hills, San Diego",
-  },
-  {
-    quote:
-      "Our 30-year-old flat roof was a disaster. Peak Roofing's waterproofing system has been flawless through two rainy seasons. Worth every penny.",
-    name: "Linda & Mark R.",
-    location: "La Jolla, San Diego",
-  },
-];
+  { quote: 'Peak Roofing completely transformed our roof. The craftsmanship was outstanding and the team was professional from start to finish.', author: 'James M.', location: 'Hillcrest', initials: 'JM' },
+  { quote: 'They showed up on time every day, worked clean, and finished ahead of schedule. Couldn\'t be happier with the result.', author: 'Sofia R.', location: 'El Cajon', initials: 'SR' },
+  { quote: 'Got 3 quotes and Peak was the most transparent. New roof looks incredible. Highly recommend to anyone in San Diego.', author: 'Derek K.', location: 'La Mesa', initials: 'DK' },
+  { quote: 'After the storm they were on-site same day. Fixed everything fast and perfectly. Incredible response time.', author: 'Laura D.', location: 'Santee', initials: 'LD' },
+  { quote: 'Best contractor experience I\'ve ever had. They handled permits, insurance, everything. Zero headaches.', author: 'Sandra K.', location: 'Mission Valley', initials: 'SK' },
+  { quote: 'Our roof has never looked better. The team was respectful of our property and cleaned up perfectly after every day.', author: 'Michael T.', location: 'Chula Vista', initials: 'MT' },
+  { quote: 'Peak did our waterproofing and solar prep. Watertight, reinforced, and finished ahead of schedule. Highly recommend.', author: 'Rachel M.', location: 'La Jolla', initials: 'RM' },
+  { quote: 'From first call to final walkthrough — seamless. Will absolutely use them again for our next project.', author: 'Oliver B.', location: 'San Diego', initials: 'OB' },
+]
 
-// Duplicate for seamless infinite loop
-const looped = [...testimonials, ...testimonials];
-
-export default function Testimonials() {
+function TestimonialCard({ quote, author, location, initials }: typeof testimonials[0]) {
   return (
-    <section className="bg-[#111111] py-24 md:py-28 overflow-hidden border-t border-white/5 border-b border-white/5">
-      <motion.div
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        transition={{ duration: 0.8 }}
-        viewport={{ once: true }}
-      >
-        {/* Section label */}
-        <div className="max-w-7xl mx-auto px-6 md:px-10 mb-14">
-          <motion.span
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, ease: [0.25, 0.1, 0.25, 1] }}
-            viewport={{ once: true }}
-            className="text-white/30 text-xs tracking-[0.2em] uppercase mb-4 block"
-          >
-            Testimonials
-          </motion.span>
-          <motion.h2
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, ease: [0.25, 0.1, 0.25, 1], delay: 0.08 }}
-            viewport={{ once: true }}
-            className="font-serif text-4xl md:text-5xl text-white leading-tight max-w-md"
-          >
-            What our clients say
-          </motion.h2>
-        </div>
-
-        {/* Scrolling strip */}
-        <div className="flex animate-marquee gap-6 w-max">
-          {looped.map((t, i) => (
-            <div
-              key={i}
-              className="flex-shrink-0 w-80 md:w-96 bg-white/5 border border-white/10 px-8 py-8"
-            >
-              {/* Stars */}
-              <div className="flex gap-1 mb-5">
-                {[...Array(5)].map((_, s) => (
-                  <svg
-                    key={s}
-                    className="w-3.5 h-3.5 text-white/50"
-                    fill="currentColor"
-                    viewBox="0 0 20 20"
-                  >
-                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                  </svg>
-                ))}
-              </div>
-
-              <p className="text-white/70 text-sm leading-relaxed mb-6 italic font-serif">
-                &ldquo;{t.quote}&rdquo;
-              </p>
-
-              <div>
-                <div className="text-white text-sm font-medium">{t.name}</div>
-                <div className="text-white/30 text-xs mt-0.5">{t.location}</div>
-              </div>
-            </div>
+    <div style={{
+      background: '#eeecea',
+      borderRadius: '20px',
+      padding: '36px 36px 36px',
+      width: '400px',
+      flexShrink: 0,
+      display: 'flex',
+      flexDirection: 'column',
+      justifyContent: 'space-between',
+      gap: '28px',
+      minHeight: '260px',
+    }}>
+      {/* Top: stars + quote */}
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+        <div style={{ display: 'flex', gap: '5px' }}>
+          {[...Array(5)].map((_, i) => (
+            <span key={i} style={{ color: '#111', fontSize: '18px' }}>★</span>
           ))}
         </div>
-      </motion.div>
+        <p style={{
+          fontSize: '16px',
+          color: '#111',
+          lineHeight: 1.65,
+          margin: 0,
+          opacity: 0.8,
+        }}>
+          {quote}
+        </p>
+      </div>
+
+      {/* Bottom: avatar + name */}
+      <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
+        <div style={{
+          width: '52px',
+          height: '52px',
+          borderRadius: '50%',
+          background: 'rgba(0,0,0,0.13)',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          fontSize: '15px',
+          fontWeight: 600,
+          color: 'rgba(0,0,0,0.4)',
+          flexShrink: 0,
+          letterSpacing: '0.5px',
+        }}>
+          {initials}
+        </div>
+        <span style={{ fontSize: '15px', fontWeight: 500, color: '#111' }}>
+          {author}
+        </span>
+      </div>
+    </div>
+  )
+}
+
+export default function Testimonials() {
+  const trackRef = useRef<HTMLDivElement>(null)
+  const xRef = useRef(0)
+  const speedRef = useRef(1)
+  const targetSpeedRef = useRef(1)
+  const rafRef = useRef<number>()
+  const halfWidthRef = useRef(0)
+
+  useEffect(() => {
+    const track = trackRef.current
+    if (!track) return
+
+    const init = () => {
+      halfWidthRef.current = track.scrollWidth / 2
+    }
+
+    const loop = () => {
+      speedRef.current += (targetSpeedRef.current - speedRef.current) * 0.05
+      xRef.current -= speedRef.current
+      if (xRef.current <= -halfWidthRef.current) {
+        xRef.current += halfWidthRef.current
+      }
+      track.style.transform = `translateX(${xRef.current}px)`
+      rafRef.current = requestAnimationFrame(loop)
+    }
+
+    setTimeout(() => {
+      init()
+      loop()
+    }, 100)
+
+    const outer = track.parentElement
+    const slowDown = () => { targetSpeedRef.current = 0.2 }
+    const speedUp = () => { targetSpeedRef.current = 1 }
+    outer?.addEventListener('mouseenter', slowDown)
+    outer?.addEventListener('mouseleave', speedUp)
+
+    return () => {
+      if (rafRef.current) cancelAnimationFrame(rafRef.current)
+      outer?.removeEventListener('mouseenter', slowDown)
+      outer?.removeEventListener('mouseleave', speedUp)
+    }
+  }, [])
+
+  const allCards = [...testimonials, ...testimonials]
+
+  return (
+    <section id="testimonials" style={{ background: '#f5f2ed', padding: '80px 0' }}>
+      <div style={{ textAlign: 'center', padding: '0 48px 48px' }}>
+        <span style={{
+          display: 'inline-block', background: '#111', color: '#fff',
+          fontSize: '11px', letterSpacing: '1.5px', textTransform: 'uppercase',
+          padding: '5px 14px', borderRadius: '100px', marginBottom: '14px',
+        }}>Testimonials</span>
+        <h2 style={{
+          fontFamily: 'var(--font-playfair, Georgia, serif)',
+          fontSize: '42px', fontWeight: 400, color: '#111', marginBottom: '10px',
+        }}>Hear from our clients</h2>
+        <p style={{ fontSize: '16px', color: '#111', opacity: 0.5 }}>
+          What San Diego homeowners say about working with Peak Roofing Co.
+        </p>
+      </div>
+
+      <div style={{ overflow: 'hidden', width: '100%', cursor: 'default' }}>
+        <div ref={trackRef} style={{ display: 'flex', width: 'max-content', gap: '16px', padding: '8px 0' }}>
+          {allCards.map((t, i) => (
+            <TestimonialCard key={i} {...t} />
+          ))}
+        </div>
+      </div>
     </section>
-  );
+  )
 }

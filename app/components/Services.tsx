@@ -42,7 +42,7 @@ const services = [
     title: "Roof Replacement",
     description:
       "Complete tear-off and replacement using premium shingles, metal, or tile built to handle San Diego weather for decades.",
-    image: "https://placehold.co/800x900/2a2a2a/555555?text=Roof+Replacement",
+    image: "/Claude Roofing Template/Roof Replacement.webp",
     icon: <HouseIcon />,
   },
   {
@@ -50,7 +50,7 @@ const services = [
     title: "Roof Repair",
     description:
       "Leaks, storm damage, missing shingles — we diagnose fast and fix it right the first time, guaranteed.",
-    image: "https://placehold.co/800x900/3a3530/706050?text=Roof+Repair",
+    image: "/Claude Roofing Template/Roof Repair.webp",
     icon: <WrenchIcon />,
   },
   {
@@ -58,7 +58,7 @@ const services = [
     title: "Roof Inspection",
     description:
       "Detailed inspection reports with photos. Ideal for homebuyers, sellers, and annual maintenance.",
-    image: "https://placehold.co/800x900/2c3035/505860?text=Roof+Inspection",
+    image: "/Claude Roofing Template/Roof inspection.webp",
     icon: <SearchIcon />,
   },
   {
@@ -66,7 +66,7 @@ const services = [
     title: "Waterproofing",
     description:
       "Protect flat roofs and decks from moisture damage with our advanced waterproofing systems.",
-    image: "https://placehold.co/800x900/253040/405570?text=Waterproofing",
+    image: "/Claude Roofing Template/Waterproofing.webp",
     icon: <DropIcon />,
   },
   {
@@ -74,7 +74,7 @@ const services = [
     title: "Solar-Ready Roofing",
     description:
       "We prep your roof for solar panel installation — reinforced decking, proper flashing, zero leaks.",
-    image: "https://placehold.co/800x900/353020/706530?text=Solar-Ready+Roofing",
+    image: "/Claude Roofing Template/Solar-Ready.webp",
     icon: <SunIcon />,
   },
   {
@@ -82,7 +82,7 @@ const services = [
     title: "Gutters & Drainage",
     description:
       "Custom seamless gutters and full drainage systems installed alongside any roofing project.",
-    image: "https://placehold.co/800x900/303030/606060?text=Gutters+%26+Drainage",
+    image: "/Claude Roofing Template/Gutters&Drain.webp",
     icon: <GutterIcon />,
   },
 ];

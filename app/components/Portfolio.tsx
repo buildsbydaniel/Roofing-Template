@@ -1,214 +1,197 @@
-'use client'
-import { useRef } from 'react'
-import { motion, useScroll, useTransform } from 'framer-motion'
+'use client';
+import { useRef } from 'react';
+import { useTransform, motion, useScroll, MotionValue } from 'framer-motion';
 
 const projects = [
   {
     title: 'Hillcrest full roof replacement',
-    description: 'Complete tear-off and installation of a new architectural shingle system on this 2,800 sq ft Hillcrest home. Finished in 2 days with zero disruption to the family.',
-    tags: ['Residential', '2 days'],
-    quote: 'Peak Roofing showed up on time, worked clean, and the roof looks incredible. Best contractor experience I\'ve ever had.',
-    author: 'James M., Hillcrest',
-    bg: '#f5f2ed',
-    text: '#111111',
-    imgBg: '#c8c4bc',
+    description:
+      'Complete tear-off and installation of a new architectural shingle system on this 2,800 sq ft Hillcrest home. Finished in 2 days with zero disruption to the family.',
+    image: '/Claude Roofing Template/Hillcrest.webp',
+    color: '#e8e4dd',
+    dark: false,
   },
   {
     title: 'Mission Valley commercial reroof',
-    description: 'Full flat roof replacement on a 12,000 sq ft commercial building using TPO membrane system. Completed on schedule with full insurance documentation.',
-    tags: ['Commercial', '1 week'],
-    quote: 'They handled everything — permits, insurance, coordination. Zero headaches. The building looks brand new.',
-    author: 'Sandra K., Mission Valley',
-    bg: '#111111',
-    text: '#ffffff',
-    imgBg: '#1e1e1e',
+    description:
+      'Full flat roof replacement on a 12,000 sq ft commercial building using TPO membrane system. Completed on schedule with full insurance documentation.',
+    image: '/Claude Roofing Template/Mission Valley.webp',
+    color: '#1a1a1a',
+    dark: true,
   },
   {
     title: 'La Jolla waterproofing & solar prep',
-    description: 'Deck waterproofing and structural reinforcement for solar panel installation on a coastal La Jolla property. Salt-air rated materials throughout.',
-    tags: ['Waterproofing', '3 days'],
-    quote: 'We needed the roof ready for solar and Peak did it perfectly. Watertight, reinforced, and ahead of schedule.',
-    author: 'Derek L., La Jolla',
-    bg: '#f5f2ed',
-    text: '#111111',
-    imgBg: '#c8c4bc',
+    description:
+      'Deck waterproofing and structural reinforcement for solar panel installation on a coastal La Jolla property. Salt-air rated materials throughout.',
+    image: '/Claude Roofing Template/La jolla.webp',
+    color: '#2c3e45',
+    dark: true,
   },
-]
+];
 
-export default function Portfolio() {
-  const containerRef = useRef<HTMLDivElement>(null)
-  const headerRef = useRef<HTMLDivElement>(null)
+interface CardProps {
+  i: number;
+  title: string;
+  description: string;
+  image: string;
+  color: string;
+  dark: boolean;
+  progress: MotionValue<number>;
+  range: [number, number];
+  targetScale: number;
+}
 
+function Card({ i, title, description, image, color, dark, progress, range, targetScale }: CardProps) {
+  const container = useRef(null);
   const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ['start start', 'end end'],
-  })
+    target: container,
+    offset: ['start end', 'start start'],
+  });
 
-  // Header slides up and fades out during first 15% of scroll
-  const headerY = useTransform(scrollYProgress, [0, 0.15], ['0%', '-110%'])
-  const headerOpacity = useTransform(scrollYProgress, [0, 0.15], [1, 0])
+  const imageScale = useTransform(scrollYProgress, [0, 1], [1.3, 1]);
+  const scale = useTransform(progress, range, [1, targetScale]);
 
-  // Card 0 rises in from 15% to 40%, shrinks from 50% to 65%
-  const card0Y = useTransform(scrollYProgress, [0.15, 0.40], ['120%', '0%'])
-  const card0Scale = useTransform(scrollYProgress, [0.50, 0.65], [1, 0.94])
-
-  // Card 1 rises in from 50% to 75%, shrinks from 75% to 90%
-  const card1Y = useTransform(scrollYProgress, [0.50, 0.75], ['120%', '0%'])
-  const card1Scale = useTransform(scrollYProgress, [0.75, 0.90], [1, 0.94])
-
-  // Card 2 rises in from 75% to 100%
-  const card2Y = useTransform(scrollYProgress, [0.75, 1.0], ['120%', '0%'])
+  const textColor = dark ? '#ffffff' : '#111111';
+  const mutedColor = dark ? 'rgba(255,255,255,0.55)' : 'rgba(17,17,17,0.55)';
 
   return (
-    <section id="portfolio" style={{ background: '#f5f2ed' }}>
-
-      {/* Tall scroll container — 400vh gives scroll room for header + 3 cards */}
-      <div ref={containerRef} style={{ height: '400vh' }}>
-
-        {/* Sticky viewport — everything renders inside here */}
-        <div style={{
-          position: 'sticky',
-          top: 0,
-          height: '100vh',
+    <div
+      ref={container}
+      style={{
+        height: '100vh',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        position: 'sticky',
+        top: 0,
+      }}
+    >
+      <motion.div
+        style={{
+          backgroundColor: color,
+          scale,
+          top: `calc(-5vh + ${i * 25}px)`,
+          position: 'relative',
+          display: 'flex',
+          width: '76%',
+          height: '460px',
+          borderRadius: '20px',
           overflow: 'hidden',
+          transformOrigin: 'top',
+        }}
+      >
+        {/* Left: text content */}
+        <div style={{
+          width: '42%',
+          flexShrink: 0,
+          padding: '48px 36px 48px 48px',
           display: 'flex',
           flexDirection: 'column',
           justifyContent: 'center',
+          gap: '18px',
+          color: textColor,
         }}>
-
-          {/* Section header — slides up as scroll begins */}
-          <motion.div
-            ref={headerRef}
-            style={{ y: headerY, opacity: headerOpacity }}
-          >
-            <div style={{ textAlign: 'center', padding: '0 48px 32px' }}>
-              <span style={{
-                display: 'inline-block',
-                background: '#111',
-                color: '#fff',
-                fontSize: '11px',
-                letterSpacing: '1.5px',
-                textTransform: 'uppercase' as const,
-                padding: '5px 14px',
-                borderRadius: '100px',
-                marginBottom: '14px',
-                fontFamily: 'var(--font-inter, sans-serif)',
-              }}>
-                Our work
-              </span>
-              <h2 style={{
-                fontFamily: 'var(--font-playfair, Georgia, serif)',
-                fontSize: '42px',
-                fontWeight: 400,
-                color: '#111',
-                lineHeight: 1.15,
-                marginBottom: '10px',
-              }}>
-                Get inspired by our work
-              </h2>
-              <p style={{ fontSize: '16px', color: '#111', opacity: 0.5 }}>
-                See how we&apos;ve protected San Diego homes with expert craftsmanship.
-              </p>
-            </div>
-          </motion.div>
-
-          {/* Card stack — cards rise from below, centered in remaining space */}
-          <div style={{
-            position: 'absolute',
-            inset: 0,
-            overflow: 'hidden',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            padding: '40px 120px',
+          <h3 style={{
+            fontFamily: 'var(--font-serif, Georgia, serif)',
+            fontSize: '26px',
+            fontWeight: 400,
+            lineHeight: 1.2,
+            margin: 0,
+            color: textColor,
           }}>
-
-            {/* Card 0 */}
-            <motion.div style={{
-              position: 'absolute',
-              inset: '40px 120px',
-              borderRadius: '20px',
-              overflow: 'hidden',
-              zIndex: 1,
-              y: card0Y,
-              scale: card0Scale,
-              background: projects[0].bg,
-              display: 'flex',
-            }}>
-              <div style={{ width: '42%', background: projects[0].imgBg, display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src="https://placehold.co/600x500" alt={projects[0].title} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
-              </div>
-              <div style={{ flex: 1, padding: '44px 40px', color: projects[0].text, display: 'flex', flexDirection: 'column', justifyContent: 'center', gap: '16px' }}>
-                <h3 style={{ fontFamily: 'var(--font-playfair, Georgia, serif)', fontSize: '28px', fontWeight: 400 }}>{projects[0].title}</h3>
-                <p style={{ fontSize: '15px', lineHeight: 1.6, opacity: 0.65 }}>{projects[0].description}</p>
-                <div style={{ display: 'flex', gap: '8px' }}>
-                  {projects[0].tags.map(tag => <span key={tag} style={{ fontSize: '11px', padding: '4px 14px', borderRadius: '100px', border: '1px solid rgba(0,0,0,0.2)', textTransform: 'uppercase' as const, letterSpacing: '0.5px' }}>{tag}</span>)}
-                </div>
-                <hr style={{ border: 'none', borderTop: '1px solid rgba(0,0,0,0.1)' }} />
-                <p style={{ fontSize: '14px', fontStyle: 'italic', lineHeight: 1.65, opacity: 0.7 }}>&ldquo;{projects[0].quote}&rdquo;</p>
-                <p style={{ fontSize: '13px', opacity: 0.45 }}>— {projects[0].author}</p>
-              </div>
-            </motion.div>
-
-            {/* Card 1 */}
-            <motion.div style={{
-              position: 'absolute',
-              inset: '40px 120px',
-              borderRadius: '20px',
-              overflow: 'hidden',
-              zIndex: 2,
-              y: card1Y,
-              scale: card1Scale,
-              background: projects[1].bg,
-              display: 'flex',
-            }}>
-              <div style={{ width: '42%', background: projects[1].imgBg, flexShrink: 0 }}>
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src="https://placehold.co/600x500" alt={projects[1].title} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
-              </div>
-              <div style={{ flex: 1, padding: '44px 40px', color: projects[1].text, display: 'flex', flexDirection: 'column', justifyContent: 'center', gap: '16px' }}>
-                <h3 style={{ fontFamily: 'var(--font-playfair, Georgia, serif)', fontSize: '28px', fontWeight: 400 }}>{projects[1].title}</h3>
-                <p style={{ fontSize: '15px', lineHeight: 1.6, opacity: 0.65 }}>{projects[1].description}</p>
-                <div style={{ display: 'flex', gap: '8px' }}>
-                  {projects[1].tags.map(tag => <span key={tag} style={{ fontSize: '11px', padding: '4px 14px', borderRadius: '100px', border: '1px solid rgba(255,255,255,0.2)', textTransform: 'uppercase' as const, letterSpacing: '0.5px', color: '#fff' }}>{tag}</span>)}
-                </div>
-                <hr style={{ border: 'none', borderTop: '1px solid rgba(255,255,255,0.12)' }} />
-                <p style={{ fontSize: '14px', fontStyle: 'italic', lineHeight: 1.65, opacity: 0.7 }}>&ldquo;{projects[1].quote}&rdquo;</p>
-                <p style={{ fontSize: '13px', opacity: 0.45 }}>— {projects[1].author}</p>
-              </div>
-            </motion.div>
-
-            {/* Card 2 */}
-            <motion.div style={{
-              position: 'absolute',
-              inset: '40px 120px',
-              borderRadius: '20px',
-              overflow: 'hidden',
-              zIndex: 3,
-              y: card2Y,
-              background: projects[2].bg,
-              display: 'flex',
-            }}>
-              <div style={{ width: '42%', background: projects[2].imgBg, flexShrink: 0 }}>
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src="https://placehold.co/600x500" alt={projects[2].title} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
-              </div>
-              <div style={{ flex: 1, padding: '44px 40px', color: projects[2].text, display: 'flex', flexDirection: 'column', justifyContent: 'center', gap: '16px' }}>
-                <h3 style={{ fontFamily: 'var(--font-playfair, Georgia, serif)', fontSize: '28px', fontWeight: 400 }}>{projects[2].title}</h3>
-                <p style={{ fontSize: '15px', lineHeight: 1.6, opacity: 0.65 }}>{projects[2].description}</p>
-                <div style={{ display: 'flex', gap: '8px' }}>
-                  {projects[2].tags.map(tag => <span key={tag} style={{ fontSize: '11px', padding: '4px 14px', borderRadius: '100px', border: '1px solid rgba(0,0,0,0.2)', textTransform: 'uppercase' as const, letterSpacing: '0.5px' }}>{tag}</span>)}
-                </div>
-                <hr style={{ border: 'none', borderTop: '1px solid rgba(0,0,0,0.1)' }} />
-                <p style={{ fontSize: '14px', fontStyle: 'italic', lineHeight: 1.65, opacity: 0.7 }}>&ldquo;{projects[2].quote}&rdquo;</p>
-                <p style={{ fontSize: '13px', opacity: 0.45 }}>— {projects[2].author}</p>
-              </div>
-            </motion.div>
-
-          </div>
+            {title}
+          </h3>
+          <p style={{
+            fontSize: '14px',
+            lineHeight: 1.65,
+            color: mutedColor,
+            margin: 0,
+          }}>
+            {description}
+          </p>
+          <a
+            href="#contact"
+            style={{
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '8px',
+              fontSize: '13px',
+              color: mutedColor,
+              textDecoration: 'underline',
+              cursor: 'pointer',
+              width: 'fit-content',
+            }}
+          >
+            Get a quote
+            <svg width="18" height="10" viewBox="0 0 22 12" fill="none">
+              <path
+                d="M21.5303 6.53033C21.8232 6.23744 21.8232 5.76256 21.5303 5.46967L16.7574 0.696699C16.4645 0.403806 15.9896 0.403806 15.6967 0.696699C15.4038 0.989592 15.4038 1.46447 15.6967 1.75736L19.9393 6L15.6967 10.2426C15.4038 10.5355 15.4038 11.0104 15.6967 11.3033C15.9896 11.5962 16.4645 11.5962 16.7574 11.3033L21.5303 6.53033ZM0 6.75L21 6.75V5.25L0 5.25L0 6.75Z"
+                fill="currentColor"
+              />
+            </svg>
+          </a>
         </div>
+
+        {/* Right: image with scale effect */}
+        <div style={{ flex: 1, position: 'relative', overflow: 'hidden' }}>
+          <motion.div style={{ scale: imageScale, width: '100%', height: '100%' }}>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={image}
+              alt={title}
+              style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+            />
+          </motion.div>
+        </div>
+      </motion.div>
+    </div>
+  );
+}
+
+export default function Portfolio() {
+  const container = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: container,
+    offset: ['start start', 'end end'],
+  });
+
+  return (
+    <section id="portfolio" className="bg-[#f5f2ed]">
+
+      {/* Section header — normal flow, scrolls away */}
+      <div className="text-center pt-24 pb-4 px-6">
+        <div className="inline-block bg-[#111111] text-white text-xs tracking-[0.15em] uppercase px-4 py-1.5 rounded-full mb-5">
+          Our Work
+        </div>
+        <h2 className="font-serif text-4xl md:text-5xl text-[#111111] leading-tight mb-4">
+          Get inspired by our work
+        </h2>
+        <p className="text-[#111111]/50 text-base max-w-md mx-auto">
+          See how we&apos;ve protected San Diego homes with expert craftsmanship and attention to detail.
+        </p>
       </div>
+
+      {/* Stacking cards container */}
+      <div ref={container}>
+        {projects.map((project, i) => {
+          const targetScale = 1 - (projects.length - i) * 0.05;
+          return (
+            <Card
+              key={i}
+              i={i}
+              title={project.title}
+              description={project.description}
+              image={project.image}
+              color={project.color}
+              dark={project.dark}
+              progress={scrollYProgress}
+              range={[i * (1 / projects.length), 1]}
+              targetScale={targetScale}
+            />
+          );
+        })}
+      </div>
+
     </section>
-  )
+  );
 }

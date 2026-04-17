@@ -133,7 +133,7 @@ export default function About() {
           >
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
-              src="https://placehold.co/700x820/d4cfc9/a09a94?text=Peak+Roofing+Team"
+              src="/Claude Roofing Template/Second Main.webp"
               alt="Peak Roofing Co. team at work on a San Diego roof"
               className="w-full h-[480px] md:h-[580px] object-cover"
             />

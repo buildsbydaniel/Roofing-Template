@@ -8,7 +8,7 @@ export default function Hero() {
       {/* Background image */}
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
-        src="https://placehold.co/1920x1080/1c1c1c/2e2e2e?text=."
+        src="/Claude Roofing Template/Main.png"
         alt=""
         aria-hidden="true"
         className="absolute inset-0 w-full h-full object-cover"
