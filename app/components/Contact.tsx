@@ -76,7 +76,7 @@ export default function Contact() {
                 { label: "Office", value: "San Diego, CA 92101" },
                 { label: "Email", value: "hello@peakroofing.com" },
                 { label: "Telephone", value: "(619) 555-0142" },
-              ].map((item, i) => (
+              ].map((item) => (
                 <div key={item.label} style={{
                   display: "flex",
                   justifyContent: "space-between",

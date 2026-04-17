@@ -12,7 +12,7 @@ const testimonials = [
   { quote: 'From first call to final walkthrough — seamless. Will absolutely use them again for our next project.', author: 'Oliver B.', location: 'San Diego', initials: 'OB' },
 ]
 
-function TestimonialCard({ quote, author, location, initials }: typeof testimonials[0]) {
+function TestimonialCard({ quote, author, initials }: typeof testimonials[0]) {
   return (
     <div style={{
       background: '#eeecea',
