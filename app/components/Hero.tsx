@@ -8,7 +8,7 @@ export default function Hero() {
       {/* Background image */}
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
-        src="/Claude Roofing Template/Main.png"
+        src="/images/Main.png"
         alt=""
         aria-hidden="true"
         className="absolute inset-0 w-full h-full object-cover"

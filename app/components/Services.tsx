@@ -42,7 +42,7 @@ const services = [
     title: "Roof Replacement",
     description:
       "Complete tear-off and replacement using premium shingles, metal, or tile built to handle San Diego weather for decades.",
-    image: "/Claude Roofing Template/Roof Replacement.webp",
+    image: "/images/Roof Replacement.webp",
     icon: <HouseIcon />,
   },
   {
@@ -50,7 +50,7 @@ const services = [
     title: "Roof Repair",
     description:
       "Leaks, storm damage, missing shingles — we diagnose fast and fix it right the first time, guaranteed.",
-    image: "/Claude Roofing Template/Roof Repair.webp",
+    image: "/images/Roof Repair.webp",
     icon: <WrenchIcon />,
   },
   {
@@ -58,7 +58,7 @@ const services = [
     title: "Roof Inspection",
     description:
       "Detailed inspection reports with photos. Ideal for homebuyers, sellers, and annual maintenance.",
-    image: "/Claude Roofing Template/Roof inspection.webp",
+    image: "/images/Roof inspection.webp",
     icon: <SearchIcon />,
   },
   {
@@ -66,7 +66,7 @@ const services = [
     title: "Waterproofing",
     description:
       "Protect flat roofs and decks from moisture damage with our advanced waterproofing systems.",
-    image: "/Claude Roofing Template/Waterproofing.webp",
+    image: "/images/Waterproofing.webp",
     icon: <DropIcon />,
   },
   {
@@ -74,7 +74,7 @@ const services = [
     title: "Solar-Ready Roofing",
     description:
       "We prep your roof for solar panel installation — reinforced decking, proper flashing, zero leaks.",
-    image: "/Claude Roofing Template/Solar-Ready.webp",
+    image: "/images/Solar-Ready.webp",
     icon: <SunIcon />,
   },
   {
@@ -82,7 +82,7 @@ const services = [
     title: "Gutters & Drainage",
     description:
       "Custom seamless gutters and full drainage systems installed alongside any roofing project.",
-    image: "/Claude Roofing Template/Gutters&Drain.webp",
+    image: "/images/Gutters&Drain.webp",
     icon: <GutterIcon />,
   },
 ];

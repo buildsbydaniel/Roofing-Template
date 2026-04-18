@@ -7,7 +7,7 @@ const projects = [
     title: 'Hillcrest full roof replacement',
     description:
       'Complete tear-off and installation of a new architectural shingle system on this 2,800 sq ft Hillcrest home. Finished in 2 days with zero disruption to the family.',
-    image: '/Claude Roofing Template/Hillcrest.webp',
+    image: '/images/Hillcrest.webp',
     color: '#e8e4dd',
     dark: false,
   },
@@ -15,7 +15,7 @@ const projects = [
     title: 'Mission Valley commercial reroof',
     description:
       'Full flat roof replacement on a 12,000 sq ft commercial building using TPO membrane system. Completed on schedule with full insurance documentation.',
-    image: '/Claude Roofing Template/Mission Valley.webp',
+    image: '/images/Mission Valley.webp',
     color: '#1a1a1a',
     dark: true,
   },
@@ -23,7 +23,7 @@ const projects = [
     title: 'La Jolla waterproofing & solar prep',
     description:
       'Deck waterproofing and structural reinforcement for solar panel installation on a coastal La Jolla property. Salt-air rated materials throughout.',
-    image: '/Claude Roofing Template/La jolla.webp',
+    image: '/images/La jolla.webp',
     color: '#2c3e45',
     dark: true,
   },
